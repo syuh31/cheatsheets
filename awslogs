@@ -1,0 +1,21 @@
+awslogs groups --profile $AWS_PROFILE
+awslogs streams --profile $AWS_PROFILE $AWS_LOG_GROUP
+
+awslogs get --profile $AWS_PROFILE $AWS_LOG_GROUP $AWS_LOG_STREAM
+awslogs get --profile $AWS_PROFILE -G -S $AWS_LOG_GROUP $AWS_LOG_STREAM
+awslogs get --profile $AWS_PROFILE -G -S --timestamp $AWS_LOG_GROUP $AWS_LOG_STREAM
+awslogs get --profile $AWS_PROFILE -G -S -w $AWS_LOG_GROUP $AWS_LOG_STREAM
+
+awslogs get --profile $AWS_PROFILE -G -S $AWS_LOG_GROUP $AWS_LOG_STREAM --start='2m'
+awslogs get --profile $AWS_PROFILE -G -S $AWS_LOG_GROUP $AWS_LOG_STREAM --start='2h'
+awslogs get --profile $AWS_PROFILE -G -S $AWS_LOG_GROUP $AWS_LOG_STREAM --start='2d'
+awslogs get --profile $AWS_PROFILE -G -S $AWS_LOG_GROUP $AWS_LOG_STREAM --start='7/10/2022 07:50:30'
+awslogs get --profile $AWS_PROFILE -G -S $AWS_LOG_GROUP $AWS_LOG_STREAM --start='7/10/2022 07:55:30'
+
+# 2分前以降かつ1分前以前のイベント
+awslogs get --profile $AWS_PROFILE -G -S $AWS_LOG_GROUP $AWS_LOG_STREAM --start='2m' --end='1m'
+
+--filter-pattern='Nmap'
+--filter-pattern='[ip, user, username, timestamp, request, status_code = 405, ...]'
+
+https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
